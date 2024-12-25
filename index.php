@@ -83,12 +83,12 @@
                 placeholder="生成したいファイルのタイプを選択してください"
                 require
               >
-              <option value="HTML">HTML</option>
-              <option value="Markdown">Markdown</option>
-              <option value="JSON">JSON</option>
-              <option value="Text">Text</option>
+              <option value="html">HTML</option>
+              <option value="markdown">Markdown</option>
+              <option value="json">JSON</option>
+              <option value="txt">Text</option>
             </select>
-              <button type="submit" class="py-2 px-3 text-white bg-blue-400 text-sm rounded-md">送信</button>
+              <button type="submit" class="py-2 px-3 text-white bg-blue-400 text-sm rounded-md">Generate</button>
             </form>
           </div>
         </div>
