@@ -28,7 +28,7 @@
                   name="min_emoloyee_salary" 
                   placeholder="従業員の最小給与範囲を入力してください" 
                   min=1
-                  max=100
+                  max=50
                   require
                 >
                 <label for="max_emoloyee_salary" class="text-sm font-semibold">最大</label>
@@ -37,7 +37,7 @@
                   type="number" 
                   name="max_emoloyee_salary" 
                   placeholder="従業員の最大給与範囲を入力してください" 
-                  min=1
+                  min=51
                   max=100
                   require
                 >
@@ -61,7 +61,7 @@
                   name="min_zip_code" 
                   placeholder="郵便番号の最小範囲を選択してください" 
                   min=1000
-                  max=9999
+                  max=5555
                   require
                 >
                 <label for="max_zip_code" class="text-sm font-semibold">最大</label>
@@ -70,7 +70,7 @@
                   type="number" 
                   name="max_zip_code" 
                   placeholder="郵便番号の最大範囲を選択してください" 
-                  min=1000
+                  min=5556
                   max=9999
                   require
                 >
