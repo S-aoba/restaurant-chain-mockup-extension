@@ -84,18 +84,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // FileTypeによって処理を変える
   if ($fileType === 'markdown') {
     header('Content-Type: text/markdown');
-    header('Content-Disposition: attachment; filename="users.md"');
+    header('Content-Disposition: attachment; filename="restaurantChains.md"');
     foreach ($restaurantChains as $restaurantChain) {
         echo $restaurantChain->toMarkdown();
     }
   } elseif ($fileType === 'json') {
       header('Content-Type: application/json');
-      header('Content-Disposition: attachment; filename="users.json"');
+      header('Content-Disposition: attachment; filename="restaurantChains.json"');
       $restaurantChaninsArray = array_map(fn($restaurantChain) => $restaurantChain->toArray(), $restaurantChains);
       echo json_encode($restaurantChaninsArray);
   } elseif ($fileType === 'txt') {
       header('Content-Type: text/plain');
-      header('Content-Disposition: attachment; filename="users.txt"');
+      header('Content-Disposition: attachment; filename="restaurantChains.txt"');
       foreach ($restaurantChains as $restaurantChain) {
           echo $restaurantChain->toString();
       }
