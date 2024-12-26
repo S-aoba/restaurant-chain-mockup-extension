@@ -65,12 +65,13 @@ class Employee extends User implements FileConvertible {
     return sprintf(
     "
       <li class='p-3 border border-gray-200 font-semibold w-full'>
-        <p class='truncate'>ID: %d Job Title: %s Start Date: %s</p>
+        <p class='truncate'>ID: %d Job Title: %s Start Date: %s Salary: %d</p>
       </li>
     ",
       parent::getId(),
       $this->jobTitle,
-      $this->startDate
+      $this->startDate,
+      $this->salary
     );
   }
 
