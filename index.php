@@ -28,7 +28,7 @@
                   name="min_emoloyee_salary" 
                   placeholder="従業員の最小給与範囲を入力してください" 
                   min=1
-                  max=50
+                  max=100
                   require
                 >
                 <label for="max_emoloyee_salary" class="text-sm font-semibold">最大</label>
@@ -37,7 +37,7 @@
                   type="number" 
                   name="max_emoloyee_salary" 
                   placeholder="従業員の最大給与範囲を入力してください" 
-                  min=51
+                  min=1
                   max=100
                   require
                 >

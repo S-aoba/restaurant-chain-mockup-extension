@@ -32,12 +32,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit('Invalid count. Must be a number between 1 and 100.');
   }
 
-  if($minEmployeeSalary < 1 || $minEmployeeSalary > 50) {
-    exit('Invalid min employee salary. Must be a number between 1 and 50.');
+  if($minEmployeeSalary < 1 || $minEmployeeSalary > 100) {
+    exit('Invalid min employee salary. Must be a number between 1 and 100.');
   }
 
-  if($maxEmployeeSalary < 51 || $maxEmployeeSalary > 100) {
-    exit('Invalid max employee salary. Must be a number between 51 and 100.');
+  if($maxEmployeeSalary < 1 || $maxEmployeeSalary > 100) {
+    exit('Invalid max employee salary. Must be a number between 1 and 100.');
   }
 
   if($restaurantLocationCount < 1 || $restaurantLocationCount > 5) {
