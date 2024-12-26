@@ -56,6 +56,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit('Invalid max zip code. Must be a number between 1000 and 9999.');
   }
 
+  if($maxZipCode < $minZipCode) {
+    exit('Invalid zip code. Min zip code must be lower than max zip code.');
+  }
+
   $fileTypeList = ['html', 'markdown', 'json', 'txt'];
   if(!in_array($fileType, $fileTypeList)) {
     exit('Invalid file type. The file type must be of type: HTML, Markdown, JSON or TXT.');
