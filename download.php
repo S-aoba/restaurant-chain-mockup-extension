@@ -40,6 +40,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit('Invalid max employee salary. Must be a number between 1 and 100.');
   }
 
+  if($maxEmployeeSalary < $minEmployeeSalary) {
+    exit('Invalid employee salary. Min employee salary must be lower than max employee salary.');
+  }
+
   if($restaurantLocationCount < 1 || $restaurantLocationCount > 5) {
     exit('Invalid restaurant location count. Must be a number between 1 and 5.');
   }
