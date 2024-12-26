@@ -48,12 +48,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit('Invalid restaurant location count. Must be a number between 1 and 5.');
   }
 
-  if($minZipCode < 1000 || $minZipCode > 5555) {
-    exit('Invalid min zip code. Must be a number between 1000 and 5555.');
+  if($minZipCode < 1000 || $minZipCode > 9999) {
+    exit('Invalid min zip code. Must be a number between 1000 and 9999.');
   }
 
-  if($maxZipCode < 5556 || $maxZipCode > 9999) {
-    exit('Invalid max zip code. Must be a number between 5556 and 9999.');
+  if($maxZipCode < 1000 || $maxZipCode > 9999) {
+    exit('Invalid max zip code. Must be a number between 1000 and 9999.');
   }
 
   $fileTypeList = ['html', 'markdown', 'json', 'txt'];

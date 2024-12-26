@@ -61,7 +61,7 @@
                   name="min_zip_code" 
                   placeholder="郵便番号の最小範囲を選択してください" 
                   min=1000
-                  max=5555
+                  max=9999
                   require
                 >
                 <label for="max_zip_code" class="text-sm font-semibold">最大</label>
@@ -70,7 +70,7 @@
                   type="number" 
                   name="max_zip_code" 
                   placeholder="郵便番号の最大範囲を選択してください" 
-                  min=5556
+                  min=1000
                   max=9999
                   require
                 >
