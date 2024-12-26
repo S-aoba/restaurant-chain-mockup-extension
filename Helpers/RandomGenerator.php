@@ -9,24 +9,40 @@ use Models\Restaurants\RestaurantLocation;
 use Models\Users\Employee;
 
 class RandomGenerator {
-  public static function restaurantChains(int $min, int $max): array
+  public static function restaurantChains(
+    int $min, 
+    int $max,
+    int $employeeCount,
+    int $minEmployeeSalary,
+    int $maxEmployeeSalary,
+    int $restaurantLocationCount,
+    int $minZipCode,
+    int $maxZipCode
+  ): array
   {
     $faker = Factory::create('ja-JP');
     $restaurantChains = [];
     $numberOfRestaurantChains = $faker->numberBetween($min, $max);
 
     for($i = 0; $i < $numberOfRestaurantChains; $i++) {
-      $restaurantChains[] = self::restaurantChain();
+      $restaurantChains[] = self::restaurantChain($employeeCount, $minEmployeeSalary, $maxEmployeeSalary, $restaurantLocationCount, $minZipCode, $maxZipCode);
     }
 
     return $restaurantChains;
   }
 
-  public static function restaurantChain(): RestaurantChain
+  public static function restaurantChain(
+    int $employeeCount, 
+    int $minEmployeeSalary, 
+    int $maxEmployeeSalary,
+    int $restaurantLocationCount,
+    int $minZipCode,
+    int $maxZipCode
+    ): RestaurantChain
   {
     $faker = Factory::create();
 
-    $restaurantLocations = self::restaurantLocations();
+    $restaurantLocations = self::restaurantLocations($employeeCount, $minEmployeeSalary, $maxEmployeeSalary, $restaurantLocationCount, $minZipCode, $maxZipCode);
 
     return new RestaurantChain(
       $faker->company,                 // name
@@ -50,17 +66,31 @@ class RandomGenerator {
   }
 
   /** @return RestaurantLocation[] */
-  public static function restaurantLocations(): array{
+  public static function restaurantLocations(
+    int $employeeCount, 
+    int $minEmployeeSalary, 
+    int $maxEmployeeSalary,
+    int $restaurantLocationCount,
+    int $minZipCode,
+    int $maxZipCode
+    ): array
+    {
     $restaurantLocationList = [];
-    $randomRestaurantLocationCount = mt_rand(1, 5);
 
-    for($i = 0; $i < $randomRestaurantLocationCount; $i++) {
-      $restaurantLocationList[] = self::restaurantLocation();
+    for($i = 0; $i < $restaurantLocationCount; $i++) {
+      $restaurantLocationList[] = self::restaurantLocation($employeeCount, $minEmployeeSalary, $maxEmployeeSalary, $minZipCode, $maxZipCode);
     }
     return $restaurantLocationList;
   }
 
-  public static function restaurantLocation(): RestaurantLocation{
+  public static function restaurantLocation(
+    int $employeeCount,
+    int $minEmployeeSalary,
+    int $maxEmployeeSalary,
+    int $minZipCode,
+    int $maxZipCode
+    ): RestaurantLocation
+    {
     $faker = Factory::create('ja-JP');
 
     return new RestaurantLocation(
@@ -68,24 +98,34 @@ class RandomGenerator {
       $faker->address,
       $faker->city,
       $faker->name,
-      $faker->numberBetween(1000, 9999),
-      self::employees(),
+      $faker->numberBetween($minZipCode, $maxZipCode),
+      self::employees($employeeCount, $minEmployeeSalary, $maxEmployeeSalary),
       $faker->boolean
     );
   }
 
   /** @return Employee[] */
-  public static function employees(): array{
+  public static function employees(
+    int $employeeCount,
+    int $minEmployeeSalary,
+    int $maxEmployeeSalary
+    )
+    : array
+    {
     $employeesList = [];
-    $randomEmployeeCount = mt_rand(1, 5);
 
-    for($i = 0; $i < $randomEmployeeCount; $i++) {
-      $employeesList[] = self::employee($i+1);
+    for($i = 0; $i < $employeeCount; $i++) {
+      $employeesList[] = self::employee($i+1, $minEmployeeSalary, $maxEmployeeSalary);
     }
     return $employeesList;
   }
 
-  public static function employee(int $id) : Employee {
+  public static function employee(
+    int $id, 
+    int $minEmployeeSalary, 
+    int $maxEmployeeSalary
+    ) : Employee 
+    {
     $faker = Factory::create('ja-JP');
 
     date_default_timezone_set('Asia/Tokyo');
@@ -101,7 +141,8 @@ class RandomGenerator {
       $faker->dateTimeBetween('-10 years','+20 years'),
       $faker->randomElement(['admin','user','editor']),
       $faker->randomElement(['Chef','Cashier','Server','Cooking Assitance']),
-      $faker->randomFloat,
+      // salary
+      $faker->randomFloat(4, $minEmployeeSalary, $maxEmployeeSalary),
       $faker->dateTimeBetween('-10 years', 'now')->format('Y-m-d'),
       array($faker->randomElement(["Good design","Good taste", "Good Customer service"])),
     );

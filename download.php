@@ -57,20 +57,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit('Invalid file type. The file type must be of type: HTML, Markdown, JSON or TXT.');
   }
 
-  $restaurantChains = Helpers\RandomGenerator::restaurantChains(2, 5);
+  $min = $_POST['min'] ?? 2;
+  $max = $_POST['max'] ?? 5;
+
+  $min = (int)$min;
+  $max = (int)$max;
+
+  $restaurantChains = Helpers\RandomGenerator::restaurantChains(
+    $min, 
+    $max,
+    $employeeCount,
+    $minEmployeeSalary,
+    $maxEmployeeSalary,
+    $restaurantLocationCount,
+    $minZipCode,
+    $maxZipCode
+  );
   // FileTypeによって処理を変える
-  if ($format === 'markdown') {
+  if ($fileType === 'markdown') {
     header('Content-Type: text/markdown');
     header('Content-Disposition: attachment; filename="users.md"');
     foreach ($restaurantChains as $restaurantChain) {
         echo $restaurantChain->toMarkdown();
     }
-  } elseif ($format === 'json') {
+  } elseif ($fileType === 'json') {
       header('Content-Type: application/json');
       header('Content-Disposition: attachment; filename="users.json"');
       $restaurantChaninsArray = array_map(fn($restaurantChain) => $restaurantChain->toArray(), $restaurantChains);
       echo json_encode($restaurantChaninsArray);
-  } elseif ($format === 'txt') {
+  } elseif ($fileType === 'txt') {
       header('Content-Type: text/plain');
       header('Content-Disposition: attachment; filename="users.txt"');
       foreach ($restaurantChains as $restaurantChain) {
